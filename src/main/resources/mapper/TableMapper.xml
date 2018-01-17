@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyt.otrs.otrsrestaurant.mapper.TableMapper" >
+
+    <resultMap id="resultMap" type="com.xyt.otrs.otrsrestaurant.domain.Restaurant" >
+        <id column="id" property="id" javaType="int"/>
+        <result column="name" property="name" />
+        <result column="address" property="phoneNO" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+    <!--<insert id="insert"  parameterType="resultMap">-->
+    <!--insert into user(uuid,name,age) values  (#{uuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER})-->
+    <!--</insert>-->
+    <select id="getTableById" parameterType="int" resultType="table">
+        SELECT * FROM ttable WHERE id = #{id}
+    </select>
+
+    <select id="getTablesByRestID" resultType="table" parameterType="int">
+        SELECT * FROM ttable WHERE restno = #{restID}
+    </select>
+
+    <insert id="insertTable" parameterType="table" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ttable(name,capacity,restno,isoder) VALUES (#{name},#{capacity},#{restno},#{isoder})
+    </insert>
+
+    <update id="updateTable" parameterType="table">
+        UPDATE ttable SET name = #{name},capacity = #{capacity},restno=#{restno},isoder=#{isoder} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTable" parameterType="table">
+        DELETE FROM ttable WHERE id = #{id}
+    </delete>
+
+</mapper>

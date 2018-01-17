@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: orts-restaurant
+  zipkin:
+    base-url: http://192.168.31.12:9411/
+  sleuth:
+      sampler:
+        percentage: 1
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8080
+c3p0:
+  jdbcUrl: jdbc:mysql://192.168.31.12:3306/otrsdb
+  user: user1_test
+  password: test12345678
+  driverClass: com.mysql.jdbc.Driver
+  minPoolSize: 2
+  maxPoolSize: 10
+  maxIdleTime: 1800000
+  acquireIncrement: 3
+  maxStatements: 1000
+  initialPoolSize: 3
+  idleConnectionTestPeriod: 60
+  acquireRetryAttempts: 30
+  acquireRetryDelay: 1000
+  breakAfterAcquireFailure: false
+  testConnectionOnCheckout: false
+mybatis:
+  type-aliases-package: com.xyt.otrs.otrsrestaurant.domain
+  mapper-locations: classpath:mapper/*Mapper.xml
+logging:
+  level:
+    com.xyt.otrs.otrsrestaurant.mapper: trace
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.31.12:8761/eureka
+#      defaultZone: http://localhost:8761/eureka
+feign:
+  hystrix:
+    enabled: true
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 1

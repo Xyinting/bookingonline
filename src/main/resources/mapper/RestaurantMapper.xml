@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyt.otrs.otrsrestaurant.mapper.RestaurantMapper" >
+
+    <resultMap id="resultMap" type="com.xyt.otrs.otrsrestaurant.domain.Restaurant" >
+        <id column="id" property="id" javaType="int"/>
+        <result column="name" property="name" />
+        <result column="address" property="phoneNO" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+    <!--<insert id="insert"  parameterType="resultMap">-->
+    <!--insert into user(uuid,name,age) values  (#{uuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER})-->
+    <!--</insert>-->
+    <select id="getRestByid" parameterType="int" resultType="restaurant">
+        SELECT * FROM restaurant WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultType="restaurant">
+        SELECT * FROM restaurant
+    </select>
+    
+    <select id="getRestsByName" parameterType="string" resultType="restaurant">
+        SELECT * FROM restaurant WHERE name LIKE '%${name}%'
+    </select>
+
+    <insert id="insertRest" parameterType="restaurant" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO restaurant(name,address,phone) VALUES (#{name},#{address},#{phone})
+    </insert>
+
+    <update id="updateRest" parameterType="restaurant">
+        UPDATE restaurant SET name = #{name},address = #{address},phone=#{phone} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteRest" parameterType="restaurant">
+        DELETE FROM restaurant WHERE id = #{id}
+    </delete>
+
+</mapper>
